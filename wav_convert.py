@@ -16,7 +16,9 @@ def code2wav(code):
 
 def convert_mp4_to_wav_pydub(input_mp4, output_wav):
     """pydub을 사용한 MP4 → WAV 변환"""
-    audio = AudioSegment.from_file(input_mp4, format="mp4")
+    output_wav=input_m4a[:-4]+".wav"
+
+    audio = AudioSegment.from_file(input_mp4)
     audio = audio.set_frame_rate(16000).set_channels(1)  # Whisper 요구사항: 16kHz, 모노 채널
     audio.export(output_wav, format="wav")
     print(f"✅ 변환 완료: {output_wav}")
@@ -24,7 +26,7 @@ def convert_mp4_to_wav_pydub(input_mp4, output_wav):
 def convert_m4a_to_wav(input_m4a):
     """M4A 파일을 WAV로 변환 (16kHz, 모노)"""
     output_wav=input_m4a[:-4]+".wav"
-    audio = AudioSegment.from_file(input_m4a, format="m4a")
+    audio = AudioSegment.from_file(input_m4a)
     audio = audio.set_frame_rate(16000).set_channels(1)  # Whisper 요구사항: 16kHz, 모노 채널
     audio = audio[:30 * 1000]  # 30초 (밀리초 단위)
     audio.export(output_wav, format="wav")
