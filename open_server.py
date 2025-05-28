@@ -13,19 +13,28 @@ import os
 
 def record_save(record):
     url = record
-    filename = record.split('/')[-1]  # 파일 이름 추출
-    save_path = os.path.join('./imgs', filename)  # 현재 디렉토리 기준 ./imgs/ 하위에 저장
+    filename = url.split('/')[-1]
 
-    os.makedirs('./imgs', exist_ok=True)  # imgs 폴더가 없으면 생성
+    # 현재 파일 기준 절대경로로 imgs 폴더 만들기
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # 이 파일의 디렉토리
+    save_dir = os.path.join(BASE_DIR, "imgs")
+    os.makedirs(save_dir, exist_ok=True)
 
-    response = requests.get(url)
-    if response.status_code == 200:
-        with open(save_path, 'wb') as f:
-            f.write(response.content)
-        print(f"파일이 {save_path}에 저장되었습니다.")
-    else:
-        print(f"파일 다운로드에 실패했습니다. 상태 코드: {response.status_code}")
-    return save_path
+    save_path = os.path.join(save_dir, filename)
+
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            with open(save_path, 'wb') as f:
+                f.write(response.content)
+            print(f"✅ 파일 저장됨: {save_path}")
+            return save_path
+        else:
+            print(f"❌ 다운로드 실패: {response.status_code}")
+            return None
+    except Exception as e:
+        print(f"❌ 다운로드 에러: {e}")
+        return None
 
 
 app = Flask(__name__)
