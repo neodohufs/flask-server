@@ -4,7 +4,19 @@ import json
 from pydub import AudioSegment
 from transformers import WhisperProcessor, WhisperForConditionalGeneration
 from wav_convert import convert_m4a_to_wav, convert_mp4_to_wav_pydub
+import re
 
+# 중복 문장 제거
+def remove_duplicate_sentences(text):
+    sentences = re.split(r'(?<=[.?!])\s+', text)
+    seen = set()
+    unique_sentences = []
+    for sentence in sentences:
+        normalized = sentence.strip()
+        if normalized and normalized not in seen:
+            seen.add(normalized)
+            unique_sentences.append(normalized)
+    return ' '.join(unique_sentences)
 def stt(record_path):
     print("토치",torch.cuda.is_available())
     # Hugging Face에서 다운로드한 모델을 로컬에서 불러오기
@@ -58,4 +70,6 @@ def stt(record_path):
         print("여기에요ㅕ",predicted_ids)
 
     result = " ".join(transcriptions)
+    result = remove_duplicate_sentences(result)
+
     return result
