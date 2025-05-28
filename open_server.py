@@ -6,15 +6,18 @@ from wav_convert import convert_m4a_to_base64, audio_score
 from neodo import to_llm,to_llm2,topics,generate_script_feedback
 import urllib3
 import requests
+import os
 # print(audio_score('C:/Users/user/Downloads/nd/nd/tests/a503.m4a'))
 # print(stt())https://neodo-backends3bucket.s3.ap-northeast-2.amazonaws.com/44c9bada-13fa-418d-a6fc-95e39786efc3.m4a
 
 
 def record_save(record):
     url = record
-    a=record.split('/')
-    record=a[-1]
-    save_path = f'C:/Users/user/Downloads/nd/imgs/{record}'  # 저장할 경로C:\Users\user\Downloads\nd\imgs
+    filename = record.split('/')[-1]  # 파일 이름 추출
+    save_path = os.path.join('./imgs', filename)  # 현재 디렉토리 기준 ./imgs/ 하위에 저장
+
+    os.makedirs('./imgs', exist_ok=True)  # imgs 폴더가 없으면 생성
+
     response = requests.get(url)
     if response.status_code == 200:
         with open(save_path, 'wb') as f:
