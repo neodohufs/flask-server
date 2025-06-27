@@ -1,9 +1,7 @@
 import torch
 import torchaudio
-import json
-from pydub import AudioSegment
 from transformers import WhisperProcessor, WhisperForConditionalGeneration
-from wav_convert import convert_m4a_to_wav, convert_mp4_to_wav_pydub
+from wav_convert import convert_m4a_to_wav
 import re
 
 # 중복 문장 제거

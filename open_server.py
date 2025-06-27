@@ -1,10 +1,8 @@
 from flask import Flask, request, jsonify
 from stt import stt
 import json
-import base64
-from wav_convert import convert_m4a_to_base64, audio_score
-from neodo import to_llm,to_llm2,topics,generate_script_feedback
-import urllib3
+from wav_convert import audio_score
+from neodo import to_llm2,topics,generate_script_feedback
 import requests
 import os
 # print(audio_score('C:/Users/user/Downloads/nd/nd/tests/a503.m4a'))

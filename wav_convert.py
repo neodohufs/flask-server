@@ -1,14 +1,8 @@
-import torch
-import torchaudio
-import base64
 import os
 from pydub import AudioSegment
-from transformers import WhisperProcessor, WhisperForConditionalGeneration
-import urllib3
 import json
 import base64
 import urllib3
-import requests
 
 def code2wav(code):
     result= code
