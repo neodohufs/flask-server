@@ -1,6 +1,10 @@
 import openai
+from dotenv import load_dotenv
+import os
 
-api_key = "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"#os.getenv("OPENAI_API_KEY")# OpenAI API 키 설정
+load_dotenv()  # .env 파일을 로드함
+
+api_key = os.getenv("OPENAI_API_KEY")
 client = openai.OpenAI(api_key=api_key)
 
 def generate_script_feedback(script):
