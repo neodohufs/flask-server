@@ -9,4 +9,4 @@ COPY . .
 
 EXPOSE 8888
 
-CMD ["python", "app.py"]
+CMD ["python", "open_server.py"]
