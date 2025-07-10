@@ -4,8 +4,8 @@ FROM python:3.11
 
 WORKDIR /app
 
-COPY --from=ffmpeg-stage /usr/bin/ffmpeg /usr/bin/
-COPY --from=ffmpeg-stage /usr/bin/ffprobe /usr/bin/
+COPY --from=ffmpeg-stage /usr/local/bin/ffmpeg /usr/local/bin/
+COPY --from=ffmpeg-stage /usr/local/bin/ffprobe /usr/local/bin/
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
