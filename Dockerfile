@@ -1,4 +1,4 @@
-FROM linuxserver/ffmpeg:5.1.2 as ffmpeg-stage
+FROM jrottenberg/ffmpeg:5.1-ubuntu2004 as ffmpeg-stage
 
 FROM python:3.11
 
